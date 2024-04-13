@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float displayTime = 2f;
     [SerializeField] private float playerPaintTime = 20f;
     [SerializeField] private float resultDisplayTime = 5f;
+    [SerializeField] private int numberOfRituals = 5;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
     private HashSet<PaintedTile> correctlyPaintedTiles = new HashSet<PaintedTile>();
@@ -27,10 +28,25 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         tileMapmanager = tileMapManager.GetComponent<ITileMapManager>();
-        StartCoroutine(ChangeTilemap());
+        StartCoroutine(StartRituals());
     }
 
-    IEnumerator ChangeTilemap()
+    IEnumerator StartRituals()
+    {
+        if (numberOfRituals > 0)
+        {
+            numberOfRituals--;
+            StartCoroutine(DisplayRitual());
+        }
+        else
+        {
+            //TODO Display Score Screen, either restart or next level
+            Debug.Log("Score Screen");
+            yield return null;
+        }
+    }
+
+    IEnumerator DisplayRitual()
     {
         tileMapmanager.DisplayNewSummoningShape();
         currentTilemap = tileMapmanager.GetCurrentTilemap();
@@ -70,7 +86,7 @@ public class GameManager : MonoBehaviour
 
         tileMapmanager.HideResultTileMap();
 
-        StartCoroutine(ChangeTilemap());
+        StartCoroutine(StartRituals());
     }
 
 
