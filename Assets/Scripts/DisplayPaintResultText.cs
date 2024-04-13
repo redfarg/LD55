@@ -10,7 +10,7 @@ public class DisplayPaintResultText : MonoBehaviour
     private TextMeshProUGUI resultText;
     private void Start()
     {
-        tilemapManager.GetComponent<TilemapManager>().OnDeterminedCorrectPercentage += DisplayResultText;
+        tilemapManager.GetComponent<GameManager>().OnDeterminedCorrectPercentage += DisplayResultText;
         resultText = GetComponent<TextMeshProUGUI>();
         resultText.text = "";
     }

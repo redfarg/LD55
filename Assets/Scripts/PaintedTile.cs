@@ -8,11 +8,13 @@ public class PaintedTile
 {
     public TileColors Color { get; private set; }
     public Vector3Int Position { get; private set; }
+    public TileBase Tile { get; private set; }
 
 
-    public PaintedTile(string name, Vector3Int position)
+    public PaintedTile(TileBase tile, Vector3Int position)
     {
-        SetColor(name);
+        Tile = tile;
+        SetColor(tile.name);
         Position = position;
     }
 
