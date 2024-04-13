@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerPainter;
     [SerializeField] private float displayTime = 2f;
     [SerializeField] private float playerPaintTime = 20f;
+    [SerializeField] private float resultDisplayTime = 5f;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
     private HashSet<PaintedTile> correctlyPaintedTiles = new HashSet<PaintedTile>();
@@ -49,17 +50,23 @@ public class GameManager : MonoBehaviour
 
         player.playerIsAllowedToPaint(false);
         GetPaintedTilesFromMap(playerPaintedTiles, playerTileMap.GetComponent<Tilemap>());
-        correctPercentage = CompareArrays(correctlyPaintedTiles, playerPaintedTiles);
-        OnDeterminedCorrectPercentage?.Invoke(correctPercentage);
-        Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
 
-        tileMapmanager.HidePlayerTileMap();
         StartCoroutine(DisplayResult());
     }
 
     IEnumerator DisplayResult()
     {
-        throw new NotImplementedException();
+        correctPercentage = CompareArrays(correctlyPaintedTiles, playerPaintedTiles);
+        OnDeterminedCorrectPercentage?.Invoke(correctPercentage);
+        Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
+
+        tileMapmanager.DisplayResultTileMap(playerPaintedTiles, correctlyPaintedTiles);
+
+        yield return new WaitForSeconds(resultDisplayTime);
+
+        tileMapmanager.HideResultTileMap();
+
+        StartCoroutine(ChangeTilemap());
     }
 
 
@@ -105,7 +112,7 @@ public class GameManager : MonoBehaviour
                     for (int y = -2; y <= 2; y++)
                     {
                         Vector3Int pos = new Vector3Int(item.Position.x + x, item.Position.y + y, item.Position.z);
-                        if (correctTileContainer.Contains(new PaintedTile(item.Tile, pos)))
+                        if (correctTileContainer.Any(x => x.IsCorrectlyPainted(new PaintedTile(item.Tile, pos))))
                         {
                             isPainted = true;
                             break;

@@ -7,7 +7,6 @@ interface ITileMapManager
     public void DisplayNewSummoningShape();
     public void HideSummoningShape();
     public void DisplayPlayerTileMap();
-    public void HidePlayerTileMap();
     public void DisplayResultTileMap(List<PaintedTile> paintedPlayerTiles, HashSet<PaintedTile> correctTiles);
     public void HideResultTileMap();
 }

@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 330653471}
   - component: {fileID: 330653473}
   - component: {fileID: 330653472}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1280,6 +1280,7 @@ MonoBehaviour:
   playerPainter: {fileID: 613582866}
   displayTime: 2
   playerPaintTime: 15
+  resultDisplayTime: 5
 --- !u!4 &739415819
 Transform:
   m_ObjectHideFlags: 0
@@ -1307,7 +1308,7 @@ GameObject:
   - component: {fileID: 782681162}
   - component: {fileID: 782681164}
   - component: {fileID: 782681163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SummoningSign1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8479,7 +8480,7 @@ GameObject:
   - component: {fileID: 1933998138}
   - component: {fileID: 1933998136}
   - component: {fileID: 1933998137}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ResultTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

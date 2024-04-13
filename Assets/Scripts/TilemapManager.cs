@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -31,8 +32,13 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
 
     public void HideSummoningShape()
     {
+        //copy currentTilemap to resultTileMap
+        foreach (var position in currentTilemap.cellBounds.allPositionsWithin)
+        {
+            resultTileMap.SetTile(position, currentTilemap.GetTile(position));
+        }
         currentTilemap.gameObject.SetActive(false);
-        easyRitualTileMaps.Remove(currentTilemap);
+        //easyRitualTileMaps.Remove(currentTilemap);
     }
 
     public void DisplayPlayerTileMap()
@@ -49,17 +55,13 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
 
     public void DisplayResultTileMap(List<PaintedTile> paintedPlayerTiles, HashSet<PaintedTile> correctTiles)
     {
-        foreach (var paintedTile in paintedPlayerTiles)
+        playerTilemap.gameObject.SetActive(false);
+        foreach (var tile in correctTiles)
         {
-            if (correctTiles.Contains(paintedTile))
-            {
-                resultTileMap.SetTile(paintedTile.Position, tileList.Find(tile => tile.name == "green_tile"));
-            }
-            else
-            {
-                resultTileMap.SetTile(paintedTile.Position, tileList.Find(tile => tile.name == "red_tile"));
-            }
+            resultTileMap.SetTile(tile.Position, tileList.Find(tile => tile.name == "red_tile"));
         }
+        resultTileMap.gameObject.SetActive(true);
+        playerTilemap.gameObject.SetActive(true);
     }
 
 
@@ -67,6 +69,7 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
     {
         resultTileMap.gameObject.SetActive(false);
         resultTileMap.ClearAllTiles();
+        HidePlayerTileMap();
     }
 
     public Tilemap GetCurrentTilemap()
