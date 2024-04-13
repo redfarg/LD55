@@ -10,10 +10,10 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
     [SerializeField] private List<Tile> tileList;
     private Tile selectedTile;
     private bool isAllowedToPaint = false;
-    private int lowerXBound = -100;
-    private int upperXBound = 100;
-    private int lowerYBound = -100;
-    private int upperYBound = 100;
+    private int lowerXBound = -20;
+    private int upperXBound = 50;
+    private int lowerYBound = -7;
+    private int upperYBound = 45;
     private float brushSize = 1f;
 
     void Update()
