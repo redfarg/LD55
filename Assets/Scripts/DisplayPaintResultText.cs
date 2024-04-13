@@ -10,9 +10,23 @@ public class DisplayPaintResultText : MonoBehaviour
     private TextMeshProUGUI resultText;
     private void Start()
     {
-        gameManager.GetComponent<GameManager>().OnDeterminedCorrectPercentage += DisplayResultText;
+        var manager = gameManager.GetComponent<GameManager>();
+        manager.OnDeterminedCorrectPercentage += DisplayResultText;
+        manager.OnEndOfRituals += DisplayEndOfStageText;
+        manager.OnRemoveSigilAccuracyText += ClearResultText;
+
         resultText = GetComponent<TextMeshProUGUI>();
         resultText.text = "";
+    }
+
+    private void ClearResultText()
+    {
+        resultText.text = "";
+    }
+
+    private void DisplayEndOfStageText()
+    {
+        resultText.text = "First Summon Complete!";
     }
 
     private void DisplayResultText(float percentage)

@@ -32,13 +32,12 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
 
     public void HideSummoningShape()
     {
-        //copy currentTilemap to resultTileMap
         foreach (var position in currentTilemap.cellBounds.allPositionsWithin)
         {
             resultTileMap.SetTile(position, currentTilemap.GetTile(position));
         }
         currentTilemap.gameObject.SetActive(false);
-        //easyRitualTileMaps.Remove(currentTilemap);
+        easyRitualTileMaps.Remove(currentTilemap);
     }
 
     public void DisplayPlayerTileMap()
@@ -67,8 +66,8 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
 
     public void HideResultTileMap()
     {
-        resultTileMap.gameObject.SetActive(false);
         resultTileMap.ClearAllTiles();
+        resultTileMap.gameObject.SetActive(false);
         HidePlayerTileMap();
     }
 

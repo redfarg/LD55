@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject tileMapManager;
     [SerializeField] private GameObject playerTileMap;
     [SerializeField] private GameObject playerPainter;
+    [SerializeField] private GameObject backgroundImage;
+    [SerializeField] private List<Sprite> backgroundImages;
     [SerializeField] private float displayTime = 2f;
     [SerializeField] private float playerPaintTime = 20f;
-    [SerializeField] private float resultDisplayTime = 5f;
-    [SerializeField] private int numberOfRituals = 0;
+    [SerializeField] private float resultDisplayTime = 10f;
+    [SerializeField] private int numberOfSigils = 0;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
     private HashSet<PaintedTile> correctlyPaintedTiles = new HashSet<PaintedTile>();
@@ -28,8 +31,11 @@ public class GameManager : MonoBehaviour
     public delegate void TimerEventHandler(float playerPaintTime);
     public event TimerEventHandler OnTimerStart;
 
-    public delegate void NumberOfRitualsEventHandler(int numberOfRituals);
-    public event NumberOfRitualsEventHandler OnNumberOfRitualsChange;
+    public delegate void EndOfRitualsEventHandler();
+    public event EndOfRitualsEventHandler OnEndOfRituals;
+
+    public delegate void RemoveSigilAccuracyTextEventHandler();
+    public event RemoveSigilAccuracyTextEventHandler OnRemoveSigilAccuracyText;
 
     void Start()
     {
@@ -39,14 +45,18 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartRituals()
     {
-        if (numberOfRituals <= 5)
+        correctlyPaintedTiles.Clear();
+        playerPaintedTiles.Clear();
+
+        if (numberOfSigils < 5)
         {
-            numberOfRituals++;
+            numberOfSigils++;
             StartCoroutine(DisplayRitual());
         }
         else
         {
             //TODO Display Score Screen, either restart or next level
+            OnEndOfRituals?.Invoke();
             Debug.Log("Score Screen");
             yield return null;
         }
@@ -57,10 +67,8 @@ public class GameManager : MonoBehaviour
         tileMapmanager.DisplayNewSummoningShape();
         currentTilemap = tileMapmanager.GetCurrentTilemap();
         GetPaintedTilesFromMap(correctlyPaintedTiles, currentTilemap);
-        OnNumberOfRitualsChange?.Invoke(numberOfRituals);
 
         yield return new WaitForSeconds(displayTime);
-
 
         tileMapmanager.HideSummoningShape();
         StartCoroutine(PlayerPaintingPhase());
@@ -88,12 +96,14 @@ public class GameManager : MonoBehaviour
         OnDeterminedCorrectPercentage?.Invoke(correctPercentage);
         OnScoreChange?.Invoke((int)correctPercentage);
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
+        backgroundImage.GetComponent<Image>().sprite = backgroundImages[numberOfSigils - 1];
 
         tileMapmanager.DisplayResultTileMap(playerPaintedTiles, correctlyPaintedTiles);
 
         yield return new WaitForSeconds(resultDisplayTime);
 
         tileMapmanager.HideResultTileMap();
+        OnRemoveSigilAccuracyText?.Invoke();
 
         StartCoroutine(StartRituals());
     }
