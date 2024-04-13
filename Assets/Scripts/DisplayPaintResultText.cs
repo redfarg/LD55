@@ -17,6 +17,6 @@ public class DisplayPaintResultText : MonoBehaviour
 
     private void DisplayResultText(float percentage)
     {
-        resultText.text = $"Summoning Ritual Accuracy: {percentage:0.00}%";
+        resultText.text = $"Summoning Sigil Accuracy: {percentage:0.00}%";
     }
 }

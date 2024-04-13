@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float displayTime = 2f;
     [SerializeField] private float playerPaintTime = 20f;
     [SerializeField] private float resultDisplayTime = 5f;
-    [SerializeField] private int numberOfRituals = 5;
+    [SerializeField] private int numberOfRituals = 0;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
     private HashSet<PaintedTile> correctlyPaintedTiles = new HashSet<PaintedTile>();
@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     public delegate void ScoreChangeEventHandler(int score);
     public event ScoreChangeEventHandler OnScoreChange;
 
+    public delegate void TimerEventHandler(float playerPaintTime);
+    public event TimerEventHandler OnTimerStart;
+
+    public delegate void NumberOfRitualsEventHandler(int numberOfRituals);
+    public event NumberOfRitualsEventHandler OnNumberOfRitualsChange;
+
     void Start()
     {
         tileMapmanager = tileMapManager.GetComponent<ITileMapManager>();
@@ -33,9 +39,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartRituals()
     {
-        if (numberOfRituals > 0)
+        if (numberOfRituals <= 5)
         {
-            numberOfRituals--;
+            numberOfRituals++;
             StartCoroutine(DisplayRitual());
         }
         else
@@ -51,6 +57,7 @@ public class GameManager : MonoBehaviour
         tileMapmanager.DisplayNewSummoningShape();
         currentTilemap = tileMapmanager.GetCurrentTilemap();
         GetPaintedTilesFromMap(correctlyPaintedTiles, currentTilemap);
+        OnNumberOfRitualsChange?.Invoke(numberOfRituals);
 
         yield return new WaitForSeconds(displayTime);
 
@@ -62,6 +69,8 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerPaintingPhase()
     {
         tileMapmanager.DisplayPlayerTileMap();
+        OnTimerStart?.Invoke(playerPaintTime);
+
         var player = playerPainter.GetComponent<IPlayerPainter>();
         player.playerIsAllowedToPaint(true);
 
