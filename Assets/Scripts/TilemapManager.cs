@@ -51,7 +51,14 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
     {
         foreach (var paintedTile in paintedPlayerTiles)
         {
-            resultTileMap.SetTile(paintedTile.Position, paintedTile.Tile);
+            if (correctTiles.Contains(paintedTile))
+            {
+                resultTileMap.SetTile(paintedTile.Position, tileList.Find(tile => tile.name == "green_tile"));
+            }
+            else
+            {
+                resultTileMap.SetTile(paintedTile.Position, tileList.Find(tile => tile.name == "red_tile"));
+            }
         }
     }
 
