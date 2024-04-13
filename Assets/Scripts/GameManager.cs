@@ -145,8 +145,12 @@ public class GameManager : MonoBehaviour
             if (correctTileContainer.Any(x => x.IsCorrectlyPainted(item)))
             {
                 correctElements++;
+                correctTileContainer.RemoveWhere(x => x.IsCorrectlyPainted(item));
             }
-
+            else if (TileIsInProximity(correctTileContainer, item))
+            {
+                correctElements++;
+            }
             else
             {
                 incorrectElements++;
@@ -165,5 +169,19 @@ public class GameManager : MonoBehaviour
         {
             return (float)matchedElements / totalElements * 100f;
         }
+    }
+
+    private static bool TileIsInProximity(HashSet<PaintedTile> correctTileContainer, PaintedTile item)
+    {
+        int proximity = 1;
+        foreach (var tile in correctTileContainer)
+        {
+            if (Math.Abs(tile.Position.x - item.Position.x) <= proximity && Math.Abs(tile.Position.y - item.Position.y) <= proximity)
+            {
+                correctTileContainer.Remove(tile);
+                return true;
+            }
+        }
+        return false;
     }
 }
