@@ -17,6 +17,12 @@ public class DisplayPaintResultText : MonoBehaviour
         LORD
     }
 
+    enum failure
+    {
+        SHRIMP,
+        FREAK,
+        POTATO
+    }
 
 
     private TextMeshProUGUI resultText;
@@ -41,19 +47,34 @@ public class DisplayPaintResultText : MonoBehaviour
         resultText.text = $"Summoning complete!\nTotal ritual power: {totalPercentage:0.00}%";
         messageBox.SetActive(true);
 
-        var adjective = totalPercentage switch
+        if (totalPercentage >= 50f)
         {
-            <= 55f => "pathetic",
-            <= 60f => "anemic",
-            <= 65f => "frail",
-            <= 70f => "feisty",
-            <= 75f => "mighty",
-            <= 80f => "grand",
-            <= 85f => "apocalyptic",
-             > 85f => "ungodly",
-             _ => ""
-        };
-        messageText.text = ritualCount == 0 ?  $"You summoned an {(demon)ritualCount}.\nIt looks {adjective}." : $"You summoned a {(demon)ritualCount}.\nIt looks {adjective}.";
+            var adjective = totalPercentage switch
+            {
+                <= 55f => "pathetic",
+                <= 60f => "anemic",
+                <= 65f => "frail",
+                <= 70f => "feisty",
+                <= 75f => "mighty",
+                <= 80f => "grand",
+                <= 85f => "apocalyptic",
+                > 85f => "ungodly",
+                _ => ""
+            };
+            messageText.text = ritualCount == 0 ? $"You summoned an {(demon)ritualCount}.\nIt looks {adjective}." : $"You summoned a {(demon)ritualCount}.\nIt looks {adjective}.";
+        }
+        else
+        {
+            var secondSentence = ritualCount switch
+            {
+                0 => "How awkward...",
+                1 => "What the hell!?",
+                2 => "Embarrassing.",
+                _ => "Are you serious?"
+            };
+
+            messageText.text = $"You summoned a {(failure)ritualCount}.\n{secondSentence}";
+        }
     }
 
     private void DisplayResultText(float percentage)
