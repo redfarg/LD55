@@ -10,30 +10,42 @@ public class PaintedTile
     public Vector3Int Position { get; private set; }
 
 
-    public PaintedTile(TileBase tileBase, Vector3Int position)
+    public PaintedTile(string name, Vector3Int position)
     {
-        SetColor(tileBase);
+        SetColor(name);
         Position = position;
     }
 
-    private void SetColor(TileBase tileBase)
+    private void SetColor(string name)
     {
         Color = TileColors.NONE;
 
-        if (tileBase == null)
-        {
-            return;
-        }
-
-        Color = tileBase.name switch
+        Color = name switch
         {
             "blacK_tile" => TileColors.BLACK,
             "white_tile" => TileColors.WHITE,
             "red_tile" => TileColors.RED,
-            "green_tile" => TileColors.GREEN,
             "purple_tile" => TileColors.PURPLE,
-            "background_tile" => TileColors.BACKGROUND,
+            "green_tile" => TileColors.GREEN,
             _ => TileColors.NONE
+        };
+    }
+
+    public bool IsCorrectlyPainted(PaintedTile other)
+    {
+        return Color == other.Color && Position == other.Position;
+    }
+
+    public string GetColorName()
+    {
+        return Color switch
+        {
+            TileColors.BLACK => "black_tile",
+            TileColors.WHITE => "white_tile",
+            TileColors.RED => "red_tile",
+            TileColors.PURPLE => "purple_tile",
+            TileColors.GREEN => "green_tile",
+            _ => ""
         };
     }
 }

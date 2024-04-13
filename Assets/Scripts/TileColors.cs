@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 public enum TileColors
 {
-    BACKGROUND,
-    RED,
-    GREEN,
-    PURPLE,
-    WHITE,
     BLACK,
+    WHITE,
+    RED,
+    PURPLE,
+    GREEN,
     NONE
 }

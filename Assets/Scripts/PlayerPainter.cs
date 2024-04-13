@@ -6,15 +6,19 @@ using UnityEngine.Tilemaps;
 
 public class PlayerPainter : MonoBehaviour, IPlayerPainter
 {
-    [SerializeField] private Tilemap tilemap;
-    [SerializeField] private Tile blackTile;
-    [SerializeField] private Tile whiteTile;
+    [SerializeField] private Tilemap playerTilemap;
+    [SerializeField] private List<Tile> tileList;
+    private Tile selectedTile;
     private bool isAllowedToPaint = false;
-
+    private int lowerXBound = -100;
+    private int upperXBound = 100;
+    private int lowerYBound = -100;
+    private int upperYBound = 100;
     private float brushSize = 1f;
 
     void Update()
     {
+        selectedTile = tileList.Find(tile => tile.name == "purple_tile");
         if (!isAllowedToPaint)
         {
             return;
@@ -23,18 +27,20 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
         if (Input.GetMouseButton(0))
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int cellPos = tilemap.WorldToCell(mouseWorldPos);
+            Vector3Int cellPos = playerTilemap.WorldToCell(mouseWorldPos);
 
-            if (tilemap.HasTile(cellPos))
+
+            if (PositionIsInBounds(cellPos) && !playerTilemap.HasTile(cellPos))
             {
-                TileBase currentTile = tilemap.GetTile(cellPos);
-                if (currentTile == whiteTile)
-                {
-                    Debug.Log(cellPos.ToString());
-                    paintTilesAccordingToBrushSize(cellPos);
-                }
+                Debug.Log(cellPos.ToString());
+                paintTilesAccordingToBrushSize(cellPos);
             }
         }
+    }
+
+    private bool PositionIsInBounds(Vector3Int cellPos)
+    {
+        return cellPos.x >= lowerXBound && cellPos.x <= upperXBound && cellPos.y >= lowerYBound && cellPos.y <= upperYBound;
     }
 
     void paintTilesAccordingToBrushSize(Vector3Int cellPos)
@@ -47,7 +53,6 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
         {
             paintMultipleTiles(cellPos);
         }
-
     }
 
     private void paintMultipleTiles(Vector3Int cellPos)
@@ -57,13 +62,9 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
             for (int y = (int)-brushSize; y <= brushSize; y++)
             {
                 Vector3Int pos = new Vector3Int(cellPos.x + x, cellPos.y + y, cellPos.z);
-                if (tilemap.HasTile(pos))
+                if (PositionIsInBounds(pos) && !playerTilemap.HasTile(pos))
                 {
-                    TileBase currentTile = tilemap.GetTile(pos);
-                    if (currentTile == whiteTile)
-                    {
-                        tilemap.SetTile(pos, blackTile);
-                    }
+                    playerTilemap.SetTile(pos, selectedTile);
                 }
             }
         }
@@ -71,7 +72,7 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
 
     private void paintSingleTile(Vector3Int cellPos)
     {
-        tilemap.SetTile(cellPos, blackTile);
+        playerTilemap.SetTile(cellPos, selectedTile);
     }
 
     public void changeBrushSize(float size)

@@ -9,6 +9,7 @@ public class TilemapManager : MonoBehaviour
 {
     [SerializeField] private List<Tilemap> tilemaps;
     [SerializeField] private GameObject playerTileMap;
+    [SerializeField] private GameObject playerPainter;
     [SerializeField] private Tile blackTile;
     [SerializeField] private Tile whiteTile;
     [SerializeField] private float displayTime = 2f;
@@ -40,7 +41,7 @@ public class TilemapManager : MonoBehaviour
     IEnumerator PlayerCanPaint()
     {
         playerTileMap.SetActive(true);
-        var player = playerTileMap.GetComponent<IPlayerPainter>();
+        var player = playerPainter.GetComponent<IPlayerPainter>();
         player.playerIsAllowedToPaint(true);
 
         yield return new WaitForSeconds(playerPaintTime);
@@ -74,7 +75,7 @@ public class TilemapManager : MonoBehaviour
                 if (tilemap.HasTile(pos))
                 {
                     TileBase currentTile = tilemap.GetTile(pos);
-                    container.Add(new PaintedTile(currentTile, pos));
+                    container.Add(new PaintedTile(currentTile.name, pos));
                 }
             }
         }
@@ -94,7 +95,7 @@ public class TilemapManager : MonoBehaviour
 
         foreach (var item in playerTileContainer)
         {
-            if (correctTileContainer.Contains(item))
+            if (correctTileContainer.Any(x => x.IsCorrectlyPainted(item)))
             {
                 correctElements++;
             }
@@ -106,7 +107,7 @@ public class TilemapManager : MonoBehaviour
                     for (int y = -2; y <= 2; y++)
                     {
                         Vector3Int pos = new Vector3Int(item.Position.x + x, item.Position.y + y, item.Position.z);
-                        if (correctTileContainer.Contains(new PaintedTile(null, pos)))
+                        if (correctTileContainer.Contains(new PaintedTile(item.GetColorName(), pos)))
                         {
                             isPainted = true;
                             break;
