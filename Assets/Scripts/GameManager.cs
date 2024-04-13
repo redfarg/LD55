@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int numberOfSigils = 0;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
+    private float totalRitualPercentage;
     private HashSet<PaintedTile> correctlyPaintedTiles = new HashSet<PaintedTile>();
     private List<PaintedTile> playerPaintedTiles = new List<PaintedTile>();
     public delegate void CorrectPercentageEventHandler(float percentage);
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     public delegate void TimerEventHandler(float playerPaintTime);
     public event TimerEventHandler OnTimerStart;
 
-    public delegate void EndOfRitualsEventHandler();
+    public delegate void EndOfRitualsEventHandler(float totalPercentage, int ritualCount);
     public event EndOfRitualsEventHandler OnEndOfRituals;
 
     public delegate void RemoveSigilAccuracyTextEventHandler();
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         tileMapmanager = tileMapManager.GetComponent<ITileMapManager>();
+        totalRitualPercentage = 0f;
         StartCoroutine(StartRituals());
     }
 
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
         else
         {
             //TODO Display Score Screen, either restart or next level
-            OnEndOfRituals?.Invoke();
+            OnEndOfRituals?.Invoke(totalRitualPercentage / 5, 0);
             Debug.Log("Score Screen");
             yield return null;
         }
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
     {
         correctPercentage = CompareArrays(correctlyPaintedTiles, playerPaintedTiles);
         OnDeterminedCorrectPercentage?.Invoke(correctPercentage);
+        totalRitualPercentage += correctPercentage;
         OnScoreChange?.Invoke((int)correctPercentage);
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
         backgroundImage.GetComponent<Image>().sprite = backgroundImages[numberOfSigils - 1];
