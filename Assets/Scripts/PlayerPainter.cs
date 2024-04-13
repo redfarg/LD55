@@ -32,7 +32,6 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
 
             if (PositionIsInBounds(cellPos) && !playerTilemap.HasTile(cellPos))
             {
-                Debug.Log(cellPos.ToString());
                 paintTilesAccordingToBrushSize(cellPos);
             }
         }

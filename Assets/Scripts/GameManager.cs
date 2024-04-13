@@ -146,34 +146,16 @@ public class GameManager : MonoBehaviour
             {
                 correctElements++;
             }
+
             else
             {
-                bool isPainted = false;
-                for (int x = -2; x <= 2; x++)
-                {
-                    for (int y = -2; y <= 2; y++)
-                    {
-                        Vector3Int pos = new Vector3Int(item.Position.x + x, item.Position.y + y, item.Position.z);
-                        if (correctTileContainer.Any(x => x.IsCorrectlyPainted(new PaintedTile(item.Tile, pos))))
-                        {
-                            isPainted = true;
-                            break;
-                        }
-                    }
-                    if (isPainted)
-                    {
-                        break;
-                    }
-                }
-                if (!isPainted)
-                {
-                    incorrectElements++;
-                }
+                incorrectElements++;
             }
         }
 
         Debug.Log($"Correct: {correctElements}, Incorrect: {incorrectElements}");
-        var matchedElements = correctElements - incorrectElements;
+        var matchedElements = correctElements - incorrectElements / 3;
+        Debug.Log($"Matched Elements: {matchedElements}");
 
         if (matchedElements <= 0)
         {
