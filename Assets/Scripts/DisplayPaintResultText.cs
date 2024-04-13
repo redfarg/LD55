@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class DisplayPaintResultText : MonoBehaviour
 {
-    [SerializeField] private GameObject tilemapManager;
+    [SerializeField] private GameObject gameManager;
     private TextMeshProUGUI resultText;
     private void Start()
     {
-        tilemapManager.GetComponent<GameManager>().OnDeterminedCorrectPercentage += DisplayResultText;
+        gameManager.GetComponent<GameManager>().OnDeterminedCorrectPercentage += DisplayResultText;
         resultText = GetComponent<TextMeshProUGUI>();
         resultText.text = "";
     }

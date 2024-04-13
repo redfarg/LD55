@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     public event CorrectPercentageEventHandler OnDeterminedCorrectPercentage;
     private float correctPercentage;
 
+    public delegate void ScoreChangeEventHandler(int score);
+    public event ScoreChangeEventHandler OnScoreChange;
+
     void Start()
     {
         tileMapmanager = tileMapManager.GetComponent<ITileMapManager>();
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
     {
         correctPercentage = CompareArrays(correctlyPaintedTiles, playerPaintedTiles);
         OnDeterminedCorrectPercentage?.Invoke(correctPercentage);
+        OnScoreChange?.Invoke((int)correctPercentage);
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
 
         tileMapmanager.DisplayResultTileMap(playerPaintedTiles, correctlyPaintedTiles);
