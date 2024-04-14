@@ -67,7 +67,7 @@ public class DisplayPaintResultText : MonoBehaviour
         resultText.text = $"Summoning complete!\nTotal ritual power: {totalPercentage:0.00}%";
         messageBox.SetActive(true);
         var summonOptions = ScoreTranslator.TranslateSummonOptions(ritualCount);
-        if (totalPercentage >= summoningSuccessFullThreshholds[ritualCount] / 500f)
+        if (totalPercentage / 100f >= summoningSuccessFullThreshholds[ritualCount] / 500f)
         {
             var adjective = ScoreTranslator.TranslateAdjectiveOptions(totalPercentage);
             messageText.text = ritualCount == 0 ? $"You summoned an {summonOptions.Item1}.\nIt looks {adjective}." : $"You summoned a {summonOptions.Item1}.\nIt looks {adjective}.";
