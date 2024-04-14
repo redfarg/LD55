@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Sprite> backgroundTexts;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private List<int> summoningSuccessFullThreshhold = new List<int>() { 250, 300, 375 };
     [SerializeField] private float sigilDisplayTime = 2f;
     [SerializeField] private float introDisplayTime = 10f;
     [SerializeField] private float sigilIntroDisplayTime = 5f;
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     public event CorrectPercentageEventHandler OnDeterminedCorrectPercentage;
     private float correctPercentage;
 
-    public delegate void ScoreChangeEventHandler(int score);
+    public delegate void ScoreChangeEventHandler(int score, int ritualCount);
     public event ScoreChangeEventHandler OnScoreChange;
 
     public delegate void TimerEventHandler(float playerPaintTime);
@@ -176,7 +177,7 @@ public class GameManager : MonoBehaviour
         correctPercentage = CompareArrays(correctlyPaintedTiles, playerPaintedTiles);
         OnDeterminedCorrectPercentage?.Invoke(correctPercentage);
         totalRitualPercentage += correctPercentage;
-        OnScoreChange?.Invoke((int)correctPercentage);
+        OnScoreChange?.Invoke((int)correctPercentage, numberOfRituals);
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
         backgroundImage.GetComponent<Image>().sprite = backgroundImages[numberOfSigils - 1];
 
@@ -265,5 +266,10 @@ public class GameManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public List<int> GetSummoningSuccessFullThreshholds()
+    {
+        return summoningSuccessFullThreshhold;
     }
 }

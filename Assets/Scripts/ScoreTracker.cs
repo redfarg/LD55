@@ -6,15 +6,13 @@ using UnityEngine;
 public class ScoreTracker : MonoBehaviour
 {
     [SerializeField] private GameObject gameManager;
-    [SerializeField] private int summoningSuccessFullThreshhold;
-
     public delegate void SummoningSuccessEventHandler();
     public event SummoningSuccessEventHandler OnSummoningSuccess;
     public delegate void ScoreChangeEventHandler(int totalScore);
     public event ScoreChangeEventHandler OnScoreChange;
     public delegate void FinalScoreEventHandler(List<float> aggregatedScores);
     public event FinalScoreEventHandler OnFinalScore;
-
+    private List<int> summoningSuccessFullThreshholds;
     public static List<float> aggregatedScores = new List<float>();
     private int totalScore = 0;
 
@@ -23,6 +21,7 @@ public class ScoreTracker : MonoBehaviour
         gameManager.GetComponent<GameManager>().OnScoreChange += AddScore;
         gameManager.GetComponent<GameManager>().OnEndOfRitual += ResetScore;
         gameManager.GetComponent<GameManager>().OnEndOfGame += PresentFinalResults;
+        summoningSuccessFullThreshholds = gameManager.GetComponent<GameManager>().GetSummoningSuccessFullThreshholds();
     }
 
     private void PresentFinalResults()
@@ -37,11 +36,11 @@ public class ScoreTracker : MonoBehaviour
         OnScoreChange?.Invoke(totalScore);
     }
 
-    private void AddScore(int score)
+    private void AddScore(int score, int ritualCount)
     {
         totalScore += score;
         Debug.Log("Total Score: " + totalScore);
-        if (totalScore >= summoningSuccessFullThreshhold)
+        if (totalScore >= summoningSuccessFullThreshholds[ritualCount])
         {
             Debug.Log("Summoning Success");
             OnSummoningSuccess?.Invoke();

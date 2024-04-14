@@ -24,7 +24,7 @@ public class ScoreTranslator
         return (demon, failure);
     }
 
-    public static string TranslateAdjecticeOptions(float totalPercentage)
+    public static string TranslateAdjectiveOptions(float totalPercentage)
     {
         var adjective = totalPercentage switch
         {
