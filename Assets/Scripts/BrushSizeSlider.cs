@@ -9,7 +9,6 @@ public class BrushSizeSlider : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 120;
         var slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener(UpdateBrushSize);
     }

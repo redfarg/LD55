@@ -12,17 +12,24 @@ public class ScoreTracker : MonoBehaviour
     public event SummoningSuccessEventHandler OnSummoningSuccess;
     public delegate void ScoreChangeEventHandler(int totalScore);
     public event ScoreChangeEventHandler OnScoreChange;
-    public List<int> scores = new List<int>();
+    public List<float> aggregatedScores = new List<float>();
     private int totalScore = 0;
 
     private void Start()
     {
         gameManager.GetComponent<GameManager>().OnScoreChange += AddScore;
+        gameManager.GetComponent<GameManager>().OnEndOfRitual += ResetScore;
+    }
+
+    private void ResetScore(float totalPercentage, int ritualCount)
+    {
+        aggregatedScores.Add(totalPercentage);
+        totalScore = 0;
+        OnScoreChange?.Invoke(totalScore);
     }
 
     private void AddScore(int score)
     {
-        scores.Add(score);
         totalScore += score;
         Debug.Log("Total Score: " + totalScore);
         if (totalScore >= summoningSuccessFullThreshhold)

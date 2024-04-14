@@ -12,11 +12,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerTileMap;
     [SerializeField] private GameObject playerPainter;
     [SerializeField] private GameObject backgroundImage;
+    [SerializeField] private GameObject backgroundImageText;
     [SerializeField] private List<Sprite> backgroundImages;
-    [SerializeField] private float displayTime = 2f;
+    [SerializeField] private List<Sprite> backgroundTexts;
+    [SerializeField] private float sigilDisplayTime = 2f;
+    [SerializeField] private float introDisplayTime = 10f;
+    [SerializeField] private float sigilIntroDisplayTime = 5f;
     [SerializeField] private float playerPaintTime = 20f;
-    [SerializeField] private float resultDisplayTime = 10f;
+    [SerializeField] private float sigilResultDisplayTime = 10f;
+    [SerializeField] private float ritualResultDisplayTime = 20f;
     [SerializeField] private int numberOfSigils = 0;
+    [SerializeField] private int numberOfRituals = 0;
+    [SerializeField] private int maxNumberOfRituals = 3;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
     private float totalRitualPercentage;
@@ -33,47 +40,97 @@ public class GameManager : MonoBehaviour
     public event TimerEventHandler OnTimerStart;
 
     public delegate void EndOfRitualsEventHandler(float totalPercentage, int ritualCount);
-    public event EndOfRitualsEventHandler OnEndOfRituals;
+    public event EndOfRitualsEventHandler OnEndOfRitual;
 
     public delegate void RemoveSigilAccuracyTextEventHandler();
     public event RemoveSigilAccuracyTextEventHandler OnRemoveSigilAccuracyText;
+    public delegate void RitualStartEventHandler(int ritualCount);
+    public event RitualStartEventHandler OnRitualStart;
+    public delegate void IntroEndEventHandler();
+    public event IntroEndEventHandler OnIntroEnd;
+    public delegate void SigilIntroStartHandler();
+    public event SigilIntroStartHandler OnSigilIntroStart;
+    public delegate void SigilIntroEndHandler();
+    public event SigilIntroEndHandler OnSigilIntroEnd;
+
 
     void Start()
     {
         tileMapmanager = tileMapManager.GetComponent<ITileMapManager>();
         totalRitualPercentage = 0f;
-        StartCoroutine(StartRituals());
+        StartCoroutine(StartRitual());
     }
 
-    IEnumerator StartRituals()
+    IEnumerator StartRitual()
+    {
+        yield return StartCoroutine(DisplayRitualIntro());
+        StartCoroutine(StartSigil());
+
+    }
+
+    IEnumerator DisplaySigilIntro()
+    {
+        OnSigilIntroStart?.Invoke();
+        yield return new WaitForSecondsRealtime(sigilIntroDisplayTime);
+        OnSigilIntroEnd?.Invoke();
+    }
+
+    IEnumerator StartSigil()
     {
         correctlyPaintedTiles.Clear();
         playerPaintedTiles.Clear();
 
         if (numberOfSigils < 5)
         {
+            yield return StartCoroutine(DisplaySigilIntro());
             numberOfSigils++;
-            StartCoroutine(DisplayRitual());
+            StartCoroutine(DisplaySigil());
         }
         else
         {
-            //TODO Display Score Screen, either restart or next level
-            OnEndOfRituals?.Invoke(totalRitualPercentage / 5, 0);
-            Debug.Log("Score Screen");
-            yield return null;
+            OnEndOfRitual?.Invoke(totalRitualPercentage / 5, numberOfRituals);
+            if (numberOfRituals < maxNumberOfRituals)
+            {
+                StartCoroutine(RestartRitual());
+            }
+            else
+            {
+                Debug.Log("Display Score Screen");
+                yield return null;
+            }
+
         }
     }
 
-    IEnumerator DisplayRitual()
+    IEnumerator DisplaySigil()
     {
         tileMapmanager.DisplayNewSummoningShape();
         currentTilemap = tileMapmanager.GetCurrentTilemap();
         GetPaintedTilesFromMap(correctlyPaintedTiles, currentTilemap);
 
-        yield return new WaitForSeconds(displayTime);
+        yield return new WaitForSeconds(sigilDisplayTime);
 
         tileMapmanager.HideSummoningShape();
         StartCoroutine(PlayerPaintingPhase());
+    }
+
+    IEnumerator DisplayRitualIntro()
+    {
+        OnRitualStart?.Invoke(numberOfRituals);
+
+        yield return new WaitForSecondsRealtime(introDisplayTime);
+
+        OnIntroEnd?.Invoke();
+    }
+
+    IEnumerator RestartRitual()
+    {
+        numberOfSigils = 0;
+        numberOfRituals++;
+        backgroundImage.GetComponent<Image>().sprite = backgroundImages[0];
+        backgroundImageText.GetComponent<Image>().sprite = backgroundTexts[numberOfRituals];
+        yield return new WaitForSecondsRealtime(ritualResultDisplayTime);
+        StartCoroutine(StartRitual());
     }
 
     IEnumerator PlayerPaintingPhase()
@@ -84,7 +141,7 @@ public class GameManager : MonoBehaviour
         var player = playerPainter.GetComponent<IPlayerPainter>();
         player.playerIsAllowedToPaint(true);
 
-        yield return new WaitForSeconds(playerPaintTime);
+        yield return new WaitForSecondsRealtime(playerPaintTime);
 
         player.playerIsAllowedToPaint(false);
         GetPaintedTilesFromMap(playerPaintedTiles, playerTileMap.GetComponent<Tilemap>());
@@ -101,14 +158,17 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
         backgroundImage.GetComponent<Image>().sprite = backgroundImages[numberOfSigils - 1];
 
+        GetPaintedTilesFromMap(correctlyPaintedTiles, currentTilemap);
+        GetPaintedTilesFromMap(playerPaintedTiles, playerTileMap.GetComponent<Tilemap>());
+
         tileMapmanager.DisplayResultTileMap(playerPaintedTiles, correctlyPaintedTiles);
 
-        yield return new WaitForSeconds(resultDisplayTime);
+        yield return new WaitForSecondsRealtime(sigilResultDisplayTime);
 
         tileMapmanager.HideResultTileMap();
         OnRemoveSigilAccuracyText?.Invoke();
 
-        StartCoroutine(StartRituals());
+        StartCoroutine(StartSigil());
     }
 
 

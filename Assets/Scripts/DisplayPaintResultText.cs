@@ -30,11 +30,41 @@ public class DisplayPaintResultText : MonoBehaviour
     {
         var manager = gameManager.GetComponent<GameManager>();
         manager.OnDeterminedCorrectPercentage += DisplayResultText;
-        manager.OnEndOfRituals += DisplayEndOfStageText;
+        manager.OnEndOfRitual += DisplayEndOfStageText;
         manager.OnRemoveSigilAccuracyText += ClearResultText;
+        manager.OnRitualStart += DisplayRitualStartText;
+        manager.OnIntroEnd += ClearIntroText;
+        manager.OnSigilIntroStart += DisplaySigilIntroText;
+        manager.OnSigilIntroEnd += ClearSigilIntroText;
 
         resultText = GetComponent<TextMeshProUGUI>();
         resultText.text = "";
+    }
+
+    private void ClearSigilIntroText()
+    {
+        messageBox.SetActive(false);
+        messageText.text = "";
+    }
+
+    private void DisplaySigilIntroText()
+    {
+        messageBox.SetActive(true);
+        messageText.text = "Observe and memorize the sigil...";
+    }
+
+    private void ClearIntroText()
+    {
+        messageBox.SetActive(false);
+        messageText.text = "";
+        resultText.text = "";
+    }
+
+    private void DisplayRitualStartText(int ritualCount)
+    {
+        resultText.text = $"Summon forth this {(demon)ritualCount}!";
+        messageBox.SetActive(true);
+        messageText.text = "The ritual begins...";
     }
 
     private void ClearResultText()
