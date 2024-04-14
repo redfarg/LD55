@@ -101,18 +101,18 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                OnEndOfGame?.Invoke();
-                DisplayEndScreen();
+                StartCoroutine(DisplayEndScreen());
                 yield return null;
             }
         }
     }
 
 
-    private void DisplayEndScreen()
+    IEnumerator DisplayEndScreen()
     {
         endScreen.SetActive(true);
-        StartCoroutine(WaitForInput());
+        OnEndOfGame?.Invoke();
+        yield return StartCoroutine(WaitForInput());
     }
 
     IEnumerator WaitForInput()

@@ -18,7 +18,7 @@ public class SummaryMessageText : MonoBehaviour
     private void DisplaySummaryMessage(List<float> aggregatedScores)
     {
         messageBox.SetActive(false);
-        var message = "";
+        var message = "Your summons: \n\n";
         for (var score = 0; score < aggregatedScores.Count; score++)
         {
             var summonOptions = ScoreTranslator.TranslateSummonOptions(score);
@@ -26,14 +26,13 @@ public class SummaryMessageText : MonoBehaviour
             if (score > 50f)
             {
                 var adjective = ScoreTranslator.TranslateAdjecticeOptions(aggregatedScores[score]);
-                message += $"You summoned a {adjective} {summonOptions.Item1} with {aggregatedScores[score]} accuracy.\n";
+                message += $"{adjective} {summonOptions.Item1}        {aggregatedScores[score]:0:00}%.\n";
             }
             else
             {
-                message += $"You summoned {summonOptions.Item2} with {aggregatedScores[score]} accuracy.\n";
+                message += $"{summonOptions.Item2}        {aggregatedScores[score]:0:00}%\n";
             }
         }
-        Debug.Log(message);
         messageText.text = message;
     }
 }

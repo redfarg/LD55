@@ -37,7 +37,7 @@ public class DisplayPaintResultText : MonoBehaviour
     private void DisplaySigilIntroText()
     {
         messageBox.SetActive(true);
-        messageText.text = "Observe and memorize the sigil...";
+        messageText.text = "Memorize and paint the sigil...";
     }
 
     private void ClearIntroText()

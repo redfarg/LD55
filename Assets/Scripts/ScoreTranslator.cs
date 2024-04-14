@@ -12,7 +12,7 @@ public class ScoreTranslator
                 break;
             case 1:
                 demon = "FIEND";
-                failure = "FREAK";
+                failure = "FRIEND";
                 break;
             case 0:
                 demon = "IMP";

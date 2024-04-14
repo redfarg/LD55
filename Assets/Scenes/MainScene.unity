@@ -12311,7 +12311,7 @@ MonoBehaviour:
   sigilDisplayTime: 2
   introDisplayTime: 5
   sigilIntroDisplayTime: 5
-  playerPaintTime: 15
+  playerPaintTime: 20
   sigilResultDisplayTime: 10
   ritualResultDisplayTime: 20
   numberOfSigils: 0
@@ -19455,7 +19455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 739415817}
   summoningSuccessFullThreshhold: 250
-  aggregatedScores: []
 --- !u!4 &802841709
 Transform:
   m_ObjectHideFlags: 0
@@ -49942,7 +49941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Test
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d29e6b39c754fd4fbae2779c36b2b40, type: 2}
   m_sharedMaterial: {fileID: -8285487435728157208, guid: 0d29e6b39c754fd4fbae2779c36b2b40, type: 2}
@@ -49976,7 +49975,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -50457,6 +50456,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580200774}
   m_CullTransparentMesh: 1
+--- !u!1 &1659993023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1659993025}
+  - component: {fileID: 1659993024}
+  m_Layer: 0
+  m_Name: SummaryMessageText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1659993024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659993023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee4e15311783f2488aa50b3ce65b68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText: {fileID: 1380860516}
+  scoreTracker: {fileID: 802841707}
+  messageBox: {fileID: 230737558}
+--- !u!4 &1659993025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659993023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1311.4382, y: 482.052, z: -4.8000083}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1672336138
 GameObject:
   m_ObjectHideFlags: 0
@@ -61716,7 +61762,6 @@ GameObject:
   - component: {fileID: 2144061410}
   - component: {fileID: 2144061413}
   - component: {fileID: 2144061412}
-  - component: {fileID: 2144061411}
   m_Layer: 5
   m_Name: EndScreen
   m_TagString: Untagged
@@ -61747,21 +61792,6 @@ RectTransform:
   m_AnchoredPosition: {x: -142.9, y: -3.5}
   m_SizeDelta: {x: 552, y: 299}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2144061411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144061409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee4e15311783f2488aa50b3ce65b68e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messageText: {fileID: 1380860516}
-  scoreTracker: {fileID: 802841707}
-  messageBox: {fileID: 230737558}
 --- !u!114 &2144061412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61815,3 +61845,4 @@ SceneRoots:
   - {fileID: 1675399967}
   - {fileID: 802841709}
   - {fileID: 1770830779}
+  - {fileID: 1659993025}
