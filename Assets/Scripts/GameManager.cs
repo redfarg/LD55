@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DisplayEndScreen()
     {
+        yield return new WaitForSeconds(ritualResultDisplayTime);
         endScreen.SetActive(true);
         OnEndOfGame?.Invoke();
         yield return StartCoroutine(WaitForInput());
