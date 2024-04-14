@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileMapManager : MonoBehaviour, ITileMapManager
 {
     [SerializeField] private List<Tilemap> easyRitualTileMaps;
+    [SerializeField] private AudioSource newRuneSound;
     [SerializeField] private Tilemap playerTilemap;
     [SerializeField] private List<Tile> tileList;
     [SerializeField] private Tilemap resultTileMap;
@@ -22,6 +23,8 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
     {
         currentTilemap = DetermineRandomTilemap();
         currentTilemap.gameObject.SetActive(true);
+        newRuneSound.Play();
+
     }
 
     private Tilemap DetermineRandomTilemap()

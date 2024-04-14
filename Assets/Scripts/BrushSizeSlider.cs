@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BrushSizeSlider : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private AudioSource buttonPressSound;
 
     void Start()
     {
@@ -16,5 +17,6 @@ public class BrushSizeSlider : MonoBehaviour
     void UpdateBrushSize(float value)
     {
         player.GetComponent<IPlayerPainter>().changeBrushSize(value);
+        buttonPressSound.Play();
     }
 }

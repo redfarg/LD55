@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Sprite> backgroundTexts;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private AudioSource circleUpdateSound;
     [SerializeField] private List<int> summoningSuccessFullThreshhold = new List<int>() { 250, 300, 375 };
     [SerializeField] private float sigilDisplayTime = 2f;
     [SerializeField] private float introDisplayTime = 10f;
@@ -180,6 +181,7 @@ public class GameManager : MonoBehaviour
         OnScoreChange?.Invoke((int)correctPercentage, numberOfRituals);
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
         backgroundImage.GetComponent<Image>().sprite = backgroundImages[numberOfSigils - 1];
+        circleUpdateSound.Play();
 
         GetPaintedTilesFromMap(correctlyPaintedTiles, currentTilemap);
         GetPaintedTilesFromMap(playerPaintedTiles, playerTileMap.GetComponent<Tilemap>());
