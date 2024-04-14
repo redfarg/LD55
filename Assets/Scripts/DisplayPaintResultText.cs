@@ -10,8 +10,9 @@ public class DisplayPaintResultText : MonoBehaviour
     [SerializeField] private GameObject messageBox;
     [SerializeField] private TextMeshProUGUI messageText;
 
-    private static ScoreTranslator scoreTranslator = new ScoreTranslator();
 
+    private static ScoreTranslator scoreTranslator = new ScoreTranslator();
+    private List<int> summoningSuccessFullThreshholds;
     private TextMeshProUGUI resultText;
     private void Start()
     {
@@ -24,6 +25,7 @@ public class DisplayPaintResultText : MonoBehaviour
         manager.OnSigilIntroStart += DisplaySigilIntroText;
         manager.OnSigilIntroEnd += ClearSigilIntroText;
 
+        summoningSuccessFullThreshholds = manager.GetSummoningSuccessFullThreshholds();
         resultText = GetComponent<TextMeshProUGUI>();
         resultText.text = "";
     }
@@ -65,9 +67,9 @@ public class DisplayPaintResultText : MonoBehaviour
         resultText.text = $"Summoning complete!\nTotal ritual power: {totalPercentage:0.00}%";
         messageBox.SetActive(true);
         var summonOptions = ScoreTranslator.TranslateSummonOptions(ritualCount);
-        if (totalPercentage >= 50f)
+        if (totalPercentage >= summoningSuccessFullThreshholds[ritualCount] / 500f)
         {
-            var adjective = ScoreTranslator.TranslateAdjecticeOptions(totalPercentage);
+            var adjective = ScoreTranslator.TranslateAdjectiveOptions(totalPercentage);
             messageText.text = ritualCount == 0 ? $"You summoned an {summonOptions.Item1}.\nIt looks {adjective}." : $"You summoned a {summonOptions.Item1}.\nIt looks {adjective}.";
         }
         else

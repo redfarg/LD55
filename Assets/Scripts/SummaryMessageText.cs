@@ -25,7 +25,7 @@ public class SummaryMessageText : MonoBehaviour
 
             if (score > 50f)
             {
-                var adjective = ScoreTranslator.TranslateAdjecticeOptions(aggregatedScores[score]);
+                var adjective = ScoreTranslator.TranslateAdjectiveOptions(aggregatedScores[score]);
                 message += $"{adjective} {summonOptions.Item1}        {aggregatedScores[score]:0:00}%.\n";
             }
             else
