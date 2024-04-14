@@ -12551,9 +12551,9 @@ MonoBehaviour:
   sigilDisplayTime: 2
   introDisplayTime: 5
   sigilIntroDisplayTime: 5
-  playerPaintTime: 20
-  sigilResultDisplayTime: 10
-  ritualResultDisplayTime: 20
+  playerPaintTime: 15
+  sigilResultDisplayTime: 6
+  ritualResultDisplayTime: 15
   numberOfSigils: 0
   numberOfRituals: 0
 --- !u!4 &739415819
