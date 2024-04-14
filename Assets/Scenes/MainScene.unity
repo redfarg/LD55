@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &39832827
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -2618,6 +2619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &198822627
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -5606,6 +5608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &247626845
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -9405,6 +9408,134 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &251190873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 251190874}
+  - component: {fileID: 251190875}
+  m_Layer: 0
+  m_Name: Chalk3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &251190874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251190873}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1557354342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &251190875
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251190873}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f5859e78ca934eb4d802647e9ec8e0ce, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &330653470
 GameObject:
   m_ObjectHideFlags: 0
@@ -9698,6 +9829,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346935582}
   m_CullTransparentMesh: 1
+--- !u!1 &364708610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 364708611}
+  - component: {fileID: 364708612}
+  m_Layer: 0
+  m_Name: Chalk2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &364708611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364708610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1557354342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &364708612
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364708610}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: adf23ef9ca2221e44baa1c3e8589b185, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &394104577
 GameObject:
   m_ObjectHideFlags: 0
@@ -10494,6 +10753,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6592770bd3321004c9a870a808b7d49c, type: 2}
   - {fileID: 11400000, guid: 6cd9ab6ae040f7444a748e20fe0d5c8a, type: 2}
   - {fileID: 11400000, guid: b2c824a7db2bf4c418feeb4bf296253c, type: 2}
+  chalkSounds:
+  - {fileID: 767004706}
+  - {fileID: 364708612}
+  - {fileID: 251190875}
 --- !u!4 &613582868
 Transform:
   m_ObjectHideFlags: 0
@@ -10557,6 +10820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &613963172
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -12721,6 +12985,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744772228}
   m_CullTransparentMesh: 1
+--- !u!1 &767004704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767004705}
+  - component: {fileID: 767004706}
+  m_Layer: 0
+  m_Name: Chalk1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &767004705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767004704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1557354342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &767004706
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767004704}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 65db062dce98cfb44b2c2db5abb72b94, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &782681161
 GameObject:
   m_ObjectHideFlags: 0
@@ -19604,6 +19996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &782681164
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -19761,6 +20154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &826300517
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -23778,6 +24172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &829358594
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -32725,6 +33120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &885017804
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -35292,6 +35688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &908628590
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -39081,6 +39478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &958782919
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -42774,6 +43172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &1234284405
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -46369,6 +46768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &1248637021
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -50949,6 +51349,9 @@ Transform:
   - {fileID: 945732871}
   - {fileID: 1430871116}
   - {fileID: 730538761}
+  - {fileID: 767004705}
+  - {fileID: 364708611}
+  - {fileID: 251190874}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571907598
@@ -51442,6 +51845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &1777618490
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -55543,6 +55947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &2039526518
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -59548,6 +59953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilemap: {fileID: 0}
   tileList: []
+  chalkSounds: []
 --- !u!483693784 &2130777232
 TilemapRenderer:
   m_ObjectHideFlags: 0

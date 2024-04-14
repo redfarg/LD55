@@ -8,6 +8,8 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
 {
     [SerializeField] private Tilemap playerTilemap;
     [SerializeField] private List<Tile> tileList;
+    [SerializeField] private List<AudioSource> chalkSounds;
+    private AudioSource chalkSound;
     private Tile selectedTile;
     private bool isAllowedToPaint = false;
     private int lowerXBound = -20;
@@ -15,25 +17,60 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
     private int lowerYBound = -7;
     private int upperYBound = 45;
     private float brushSize = 1f;
+    private bool isPainting = false;
+
+    private void Start()
+    {
+        selectedTile = tileList.Find(tile => tile.name == "white_tile");
+    }
 
     void Update()
     {
-        selectedTile = tileList.Find(tile => tile.name == "white_tile");
         if (!isAllowedToPaint)
         {
+            StopChalkSound();
             return;
         }
 
         if (Input.GetMouseButton(0))
         {
+            if (!isPainting)
+            {
+                isPainting = true;
+                PlayChalkSound();
+            }
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int cellPos = playerTilemap.WorldToCell(mouseWorldPos);
-
 
             if (PositionIsInBounds(cellPos) && !playerTilemap.HasTile(cellPos))
             {
                 paintTilesAccordingToBrushSize(cellPos);
             }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (isPainting)
+            {
+                StopChalkSound();
+            }
+        }
+    }
+
+    private void PlayChalkSound()
+    {
+        var index = UnityEngine.Random.Range(0, chalkSounds.Count - 1);
+        Debug.Log(index);
+        chalkSound = chalkSounds[index];
+        Debug.Log(chalkSound.name);
+        chalkSound.Play();
+    }
+
+    private void StopChalkSound()
+    {
+        if (isPainting)
+        {
+            isPainting = false;
+            chalkSound.Stop();
         }
     }
 
