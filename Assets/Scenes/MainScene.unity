@@ -50727,7 +50727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ritual Summary
+  m_text: Summary
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d29e6b39c754fd4fbae2779c36b2b40, type: 2}
   m_sharedMaterial: {fileID: -8285487435728157208, guid: 0d29e6b39c754fd4fbae2779c36b2b40, type: 2}
