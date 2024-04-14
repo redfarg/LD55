@@ -51092,6 +51092,9 @@ MonoBehaviour:
   summoningProgressBarActive: {fileID: 216223506}
   scoreTracker: {fileID: 802841707}
   gameManager: {fileID: 739415817}
+  progressBarBackground_50p: {fileID: 21300000, guid: eb728d61950538044a7e8e815c90be10, type: 3}
+  progressBarBackground_60p: {fileID: 21300000, guid: 5f76a8dd26a332d4eb61714f81c5ea16, type: 3}
+  progressBarBackground_75p: {fileID: 21300000, guid: 364a8fdd983c25d44ac836b2e2c85cdf, type: 3}
 --- !u!114 &1672336141
 MonoBehaviour:
   m_ObjectHideFlags: 0

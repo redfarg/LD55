@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DentedPixel;
 using System;
+using UnityEngine.UI;
 
 public class SummoningProgressBar : MonoBehaviour
 {
@@ -10,7 +11,11 @@ public class SummoningProgressBar : MonoBehaviour
     [SerializeField] private GameObject summoningProgressBarActive;
     [SerializeField] private GameObject scoreTracker;
     [SerializeField] private GameObject gameManager;
+    [SerializeField] private Sprite progressBarBackground_50p;
+    [SerializeField] private Sprite progressBarBackground_60p;
+    [SerializeField] private Sprite progressBarBackground_75p;
 
+    private Image image;
     void Start()
     {
         var scoreTrackerScript = scoreTracker.GetComponent<ScoreTracker>();
@@ -19,12 +24,25 @@ public class SummoningProgressBar : MonoBehaviour
         summoningProgressBar.SetActive(true);
         var gameManagerScript = gameManager.GetComponent<GameManager>();
         gameManagerScript.OnEndOfRitual += ResetSummoningProgressBar;
+        gameManagerScript.OnRitualStart += UpdateSummoningBarBackgroundImage;
+        image = gameObject.GetComponent<Image>();
     }
 
     private void ResetSummoningProgressBar(float totalPercentage, int ritualCount)
     {
         summoningProgressBar.SetActive(true);
         summoningProgressBarActive.SetActive(false);
+
+        if(ritualCount == 1) image.sprite = progressBarBackground_60p;
+        else if (ritualCount == 2) image.sprite = progressBarBackground_75p;
+        else image.sprite= progressBarBackground_50p;
+    }
+
+    private void UpdateSummoningBarBackgroundImage(int ritualCount)
+    {
+        if(ritualCount == 1) image.sprite = progressBarBackground_60p;
+        else if (ritualCount == 2) image.sprite = progressBarBackground_75p;
+        else image.sprite= progressBarBackground_50p;
     }
 
     private void UpdateSummoningProgressBarSize(int totalScore)
