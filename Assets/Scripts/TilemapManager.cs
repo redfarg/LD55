@@ -62,6 +62,11 @@ public class TileMapManager : MonoBehaviour, ITileMapManager
         {
             resultTileMap.SetTile(tile.Position, tileList.Find(tile => tile.name == "red_tile"));
         }
+        playerTilemap.ClearAllTiles();
+        foreach (var tile in paintedPlayerTiles)
+        {
+            playerTilemap.SetTile(tile.Position, tileList.Find(tile => tile.name == "white_chalk"));
+        }
         resultTileMap.gameObject.SetActive(true);
         playerTilemap.gameObject.SetActive(true);
     }

@@ -18,7 +18,7 @@ public class PlayerPainter : MonoBehaviour, IPlayerPainter
 
     void Update()
     {
-        selectedTile = tileList.Find(tile => tile.name == "white_chalk");
+        selectedTile = tileList.Find(tile => tile.name == "white_tile");
         if (!isAllowedToPaint)
         {
             return;
