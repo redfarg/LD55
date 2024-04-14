@@ -30,7 +30,7 @@ public class SummaryMessageText : MonoBehaviour
             }
             else
             {
-                message += $"{summonOptions.Item2}        {aggregatedScores[score]:0:00}%\n";
+                message += $"{summonOptions.Item2}        {aggregatedScores[score]:0.00}%\n";
             }
         }
         messageText.text = message;
