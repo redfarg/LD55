@@ -18,7 +18,7 @@ public class SliderValueDisplayText : MonoBehaviour
 
     void UpdateBrushSizeText(float value)
     {
-        sizeText.text = "Brush size: " + value.ToString();
+        sizeText.text = "Chalk size: " + (value + 1).ToString();
     }
 
 }
