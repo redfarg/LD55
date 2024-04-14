@@ -8,14 +8,23 @@ public class SummoningProgressBar : MonoBehaviour
 {
     [SerializeField] private GameObject summoningProgressBar;
     [SerializeField] private GameObject summoningProgressBarActive;
+    [SerializeField] private GameObject scoreTracker;
+    [SerializeField] private GameObject gameManager;
 
-    private ScoreTracker scoreTracker;
     void Start()
     {
-        scoreTracker = GameObject.Find("ScoreTracker").GetComponent<ScoreTracker>();
-        scoreTracker.OnSummoningSuccess += UpdateSummoningProgressBar;
-        scoreTracker.OnScoreChange += UpdateSummoningProgressBarSize;
+        var scoreTrackerScript = scoreTracker.GetComponent<ScoreTracker>();
+        scoreTrackerScript.OnSummoningSuccess += UpdateSummoningProgressBar;
+        scoreTrackerScript.OnScoreChange += UpdateSummoningProgressBarSize;
         summoningProgressBar.SetActive(true);
+        var gameManagerScript = gameManager.GetComponent<GameManager>();
+        gameManagerScript.OnEndOfRitual += ResetSummoningProgressBar;
+    }
+
+    private void ResetSummoningProgressBar(float totalPercentage, int ritualCount)
+    {
+        summoningProgressBar.SetActive(true);
+        summoningProgressBarActive.SetActive(false);
     }
 
     private void UpdateSummoningProgressBarSize(int totalScore)

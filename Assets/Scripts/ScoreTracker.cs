@@ -12,6 +12,9 @@ public class ScoreTracker : MonoBehaviour
     public event SummoningSuccessEventHandler OnSummoningSuccess;
     public delegate void ScoreChangeEventHandler(int totalScore);
     public event ScoreChangeEventHandler OnScoreChange;
+    public delegate void FinalSCoreEventHandler(List<float> aggregatedScores);
+    public event FinalSCoreEventHandler OnFinalScore;
+
     public List<float> aggregatedScores = new List<float>();
     private int totalScore = 0;
 
@@ -19,6 +22,12 @@ public class ScoreTracker : MonoBehaviour
     {
         gameManager.GetComponent<GameManager>().OnScoreChange += AddScore;
         gameManager.GetComponent<GameManager>().OnEndOfRitual += ResetScore;
+        gameManager.GetComponent<GameManager>().OnEndOfGame += PresenFinalResults;
+    }
+
+    private void PresenFinalResults()
+    {
+        OnFinalScore?.Invoke(aggregatedScores);
     }
 
     private void ResetScore(float totalPercentage, int ritualCount)

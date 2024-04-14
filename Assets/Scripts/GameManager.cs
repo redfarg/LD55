@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -13,8 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerPainter;
     [SerializeField] private GameObject backgroundImage;
     [SerializeField] private GameObject backgroundImageText;
+    [SerializeField] private GameObject endScreen;
     [SerializeField] private List<Sprite> backgroundImages;
     [SerializeField] private List<Sprite> backgroundTexts;
+    [SerializeField] private Button restartButton;
+    [SerializeField] private Button quitButton;
     [SerializeField] private float sigilDisplayTime = 2f;
     [SerializeField] private float introDisplayTime = 10f;
     [SerializeField] private float sigilIntroDisplayTime = 5f;
@@ -23,7 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float ritualResultDisplayTime = 20f;
     [SerializeField] private int numberOfSigils = 0;
     [SerializeField] private int numberOfRituals = 0;
-    [SerializeField] private int maxNumberOfRituals = 3;
     private Tilemap currentTilemap;
     private ITileMapManager tileMapmanager;
     private float totalRitualPercentage;
@@ -52,6 +56,8 @@ public class GameManager : MonoBehaviour
     public event SigilIntroStartHandler OnSigilIntroStart;
     public delegate void SigilIntroEndHandler();
     public event SigilIntroEndHandler OnSigilIntroEnd;
+    public delegate void EndOfGameHandler();
+    public event EndOfGameHandler OnEndOfGame;
 
 
     void Start()
@@ -89,16 +95,31 @@ public class GameManager : MonoBehaviour
         else
         {
             OnEndOfRitual?.Invoke(totalRitualPercentage / 5, numberOfRituals);
-            if (numberOfRituals < maxNumberOfRituals)
+            if (numberOfRituals < 2)
             {
                 StartCoroutine(RestartRitual());
             }
             else
             {
-                Debug.Log("Display Score Screen");
+                OnEndOfGame?.Invoke();
+                DisplayEndScreen();
                 yield return null;
             }
+        }
+    }
 
+
+    private void DisplayEndScreen()
+    {
+        endScreen.SetActive(true);
+        StartCoroutine(WaitForInput());
+    }
+
+    IEnumerator WaitForInput()
+    {
+        while (true)
+        {
+            yield return null;
         }
     }
 
@@ -126,10 +147,11 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartRitual()
     {
         numberOfSigils = 0;
+        totalRitualPercentage = 0f;
         numberOfRituals++;
         backgroundImage.GetComponent<Image>().sprite = backgroundImages[0];
-        backgroundImageText.GetComponent<Image>().sprite = backgroundTexts[numberOfRituals];
         yield return new WaitForSecondsRealtime(ritualResultDisplayTime);
+        backgroundImageText.GetComponent<Image>().sprite = backgroundTexts[numberOfRituals];
         StartCoroutine(StartRitual());
     }
 
