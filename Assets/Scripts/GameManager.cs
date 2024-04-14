@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject backgroundImage;
     [SerializeField] private GameObject backgroundImageText;
     [SerializeField] private GameObject endScreen;
-    [SerializeField] private List<Sprite> backgroundImages;
+    [SerializeField] private Sprite defaultBackgroundScreen;
+    [SerializeField] private List<Sprite> activeBackgroundImages;
     [SerializeField] private List<Sprite> backgroundTexts;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button quitButton;
@@ -151,8 +152,8 @@ public class GameManager : MonoBehaviour
         numberOfSigils = 0;
         totalRitualPercentage = 0f;
         numberOfRituals++;
-        backgroundImage.GetComponent<Image>().sprite = backgroundImages[0];
         yield return new WaitForSecondsRealtime(ritualResultDisplayTime);
+        backgroundImage.GetComponent<Image>().sprite = defaultBackgroundScreen;
         backgroundImageText.GetComponent<Image>().sprite = backgroundTexts[numberOfRituals];
         StartCoroutine(StartRitual());
     }
@@ -180,7 +181,7 @@ public class GameManager : MonoBehaviour
         totalRitualPercentage += correctPercentage;
         OnScoreChange?.Invoke((int)correctPercentage, numberOfRituals);
         Debug.Log($"Correctly painted: {correctPercentage:0.00}%");
-        backgroundImage.GetComponent<Image>().sprite = backgroundImages[numberOfSigils - 1];
+        backgroundImage.GetComponent<Image>().sprite = activeBackgroundImages[numberOfSigils - 1];
         circleUpdateSound.Play();
 
         GetPaintedTilesFromMap(correctlyPaintedTiles, currentTilemap);

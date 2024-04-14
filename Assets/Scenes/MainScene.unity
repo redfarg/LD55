@@ -12534,7 +12534,8 @@ MonoBehaviour:
   backgroundImage: {fileID: 1571907598}
   backgroundImageText: {fileID: 469672801}
   endScreen: {fileID: 2144061409}
-  backgroundImages:
+  defaultBackgroundScreen: {fileID: 21300000, guid: 7fe8f8b2994b7da40a6ac2e342fb9931, type: 3}
+  activeBackgroundImages:
   - {fileID: 21300000, guid: 1b5384481c7602449bb61cc1ad4b4e4d, type: 3}
   - {fileID: 21300000, guid: a691678bfe6bed5429748ed07eb77c48, type: 3}
   - {fileID: 21300000, guid: dd3718735909cb44da69d52c168c3ed8, type: 3}
@@ -12553,7 +12554,7 @@ MonoBehaviour:
   sigilIntroDisplayTime: 5
   playerPaintTime: 15
   sigilResultDisplayTime: 6
-  ritualResultDisplayTime: 15
+  ritualResultDisplayTime: 12
   numberOfSigils: 0
   numberOfRituals: 0
 --- !u!4 &739415819
