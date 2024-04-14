@@ -64,7 +64,7 @@ public class DisplayPaintResultText : MonoBehaviour
 
     private void DisplayEndOfStageText(float totalPercentage, int ritualCount)
     {
-        resultText.text = $"Summoning complete!\nTotal ritual power: {totalPercentage:0.00}%";
+        resultText.text = $"Ritual complete\nTotal power: {totalPercentage:0.00}%";
         messageBox.SetActive(true);
         var summonOptions = ScoreTranslator.TranslateSummonOptions(ritualCount);
         if (totalPercentage / 100f >= summoningSuccessFullThreshholds[ritualCount] / 500f)
