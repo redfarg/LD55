@@ -19,20 +19,27 @@ public class SummaryMessageText : MonoBehaviour
     {
         messageBox.SetActive(false);
         var message = "All rituals are complete.\n\nYou summoned: \n\n";
-        for (var score = 0; score < aggregatedScores.Count; score++)
+        for (var scoreIndex = 0; scoreIndex < aggregatedScores.Count; scoreIndex++)
         {
-            var summonOptions = ScoreTranslator.TranslateSummonOptions(score);
+            var summonOptions = ScoreTranslator.TranslateSummonOptions(scoreIndex);
 
-            if (score > 50f)
+            if (SummoningWasSuccessful(aggregatedScores, scoreIndex))
             {
-                var adjective = ScoreTranslator.TranslateAdjectiveOptions(aggregatedScores[score]);
-                message += $"{adjective} {summonOptions.Item1}\t\t{aggregatedScores[score]:0.00}%.\n";
+                var adjective = ScoreTranslator.TranslateAdjectiveOptions(aggregatedScores[scoreIndex]);
+                message += $"{adjective} {summonOptions.Item1}\t\t{aggregatedScores[scoreIndex]:0.00}%.\n";
             }
             else
             {
-                message += $"{summonOptions.Item2}\t\t{aggregatedScores[score]:0.00}%\n";
+                message += $"{summonOptions.Item2}\t\t{aggregatedScores[scoreIndex]:0.00}%\n";
             }
         }
         messageText.text = message;
+    }
+
+    private static bool SummoningWasSuccessful(List<float> aggregatedScores, int scoreIndex)
+    {
+        return (aggregatedScores[scoreIndex] >= 50f && scoreIndex == 0) ||
+            (aggregatedScores[scoreIndex] >= 60f && scoreIndex == 1) ||
+            (aggregatedScores[scoreIndex] >= 75f && scoreIndex == 2);
     }
 }

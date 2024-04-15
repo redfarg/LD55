@@ -27,7 +27,7 @@ public class TimerTextUpdate : MonoBehaviour
     {
         if (timerIsRunning)
         {
-            if (timeRemaining > 1)
+            if (timeRemaining > 1.5f)
             {
                 timeRemaining -= Time.deltaTime;
                 UpdateTimer(timeRemaining);
