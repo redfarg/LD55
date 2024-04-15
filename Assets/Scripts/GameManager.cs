@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private AudioSource circleUpdateSound;
-    [SerializeField] private List<int> summoningSuccessFullThreshhold = new List<int>() { 250, 300, 375 };
+    [SerializeField] private List<int> summoningSuccessFullThreshhold = new List<int>() { 250, 300, 350 };
     [SerializeField] private float sigilDisplayTime = 2f;
     [SerializeField] private float introDisplayTime = 10f;
     [SerializeField] private float sigilIntroDisplayTime = 5f;

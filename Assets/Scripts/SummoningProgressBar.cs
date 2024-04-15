@@ -13,7 +13,7 @@ public class SummoningProgressBar : MonoBehaviour
     [SerializeField] private GameObject gameManager;
     [SerializeField] private Sprite progressBarBackground_50p;
     [SerializeField] private Sprite progressBarBackground_60p;
-    [SerializeField] private Sprite progressBarBackground_75p;
+    [SerializeField] private Sprite progressBarBackground_70p;
 
     private Image image;
     void Start()
@@ -34,14 +34,14 @@ public class SummoningProgressBar : MonoBehaviour
         summoningProgressBarActive.SetActive(false);
 
         if(ritualCount == 1) image.sprite = progressBarBackground_60p;
-        else if (ritualCount == 2) image.sprite = progressBarBackground_75p;
+        else if (ritualCount == 2) image.sprite = progressBarBackground_70p;
         else image.sprite= progressBarBackground_50p;
     }
 
     private void UpdateSummoningBarBackgroundImage(int ritualCount)
     {
         if(ritualCount == 1) image.sprite = progressBarBackground_60p;
-        else if (ritualCount == 2) image.sprite = progressBarBackground_75p;
+        else if (ritualCount == 2) image.sprite = progressBarBackground_70p;
         else image.sprite= progressBarBackground_50p;
     }
 

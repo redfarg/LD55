@@ -29962,7 +29962,7 @@ MonoBehaviour:
   restartButton: {fileID: 0}
   quitButton: {fileID: 0}
   circleUpdateSound: {fileID: 730538762}
-  summoningSuccessFullThreshhold: fa0000002c01000077010000
+  summoningSuccessFullThreshhold: fa0000002c0100005e010000
   sigilDisplayTime: 2
   introDisplayTime: 5
   sigilIntroDisplayTime: 5
@@ -92533,7 +92533,7 @@ MonoBehaviour:
   gameManager: {fileID: 739415817}
   progressBarBackground_50p: {fileID: 21300000, guid: eb728d61950538044a7e8e815c90be10, type: 3}
   progressBarBackground_60p: {fileID: 21300000, guid: 5f76a8dd26a332d4eb61714f81c5ea16, type: 3}
-  progressBarBackground_75p: {fileID: 21300000, guid: 364a8fdd983c25d44ac836b2e2c85cdf, type: 3}
+  progressBarBackground_70p: {fileID: 21300000, guid: 909ec975ba31f4e40972cadfc4748f5c, type: 3}
 --- !u!114 &1672336141
 MonoBehaviour:
   m_ObjectHideFlags: 0

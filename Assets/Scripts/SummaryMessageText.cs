@@ -40,6 +40,6 @@ public class SummaryMessageText : MonoBehaviour
     {
         return (aggregatedScores[scoreIndex] >= 50f && scoreIndex == 0) ||
             (aggregatedScores[scoreIndex] >= 60f && scoreIndex == 1) ||
-            (aggregatedScores[scoreIndex] >= 75f && scoreIndex == 2);
+            (aggregatedScores[scoreIndex] >= 70f && scoreIndex == 2);
     }
 }
