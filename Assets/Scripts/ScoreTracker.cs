@@ -31,6 +31,10 @@ public class ScoreTracker : MonoBehaviour
 
     private void ResetScore(float totalPercentage, int ritualCount)
     {
+        if (aggregatedScores.Count > 3)
+        {
+            aggregatedScores.Clear();
+        }
         aggregatedScores.Add(totalPercentage);
         totalScore = 0;
         OnScoreChange?.Invoke(totalScore);
