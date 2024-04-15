@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public delegate void EndOfRitualsEventHandler(float totalPercentage, int ritualCount);
     public event EndOfRitualsEventHandler OnEndOfRitual;
 
-    public delegate void RemoveSigilAccuracyTextEventHandler();
+    public delegate void RemoveSigilAccuracyTextEventHandler(int numberOfRituals);
     public event RemoveSigilAccuracyTextEventHandler OnRemoveSigilAccuracyText;
     public delegate void RitualStartEventHandler(int ritualCount);
     public event RitualStartEventHandler OnRitualStart;
@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(sigilResultDisplayTime);
 
         tileMapmanager.HideResultTileMap();
-        OnRemoveSigilAccuracyText?.Invoke();
+        OnRemoveSigilAccuracyText?.Invoke(numberOfRituals);
 
         StartCoroutine(StartSigil());
     }

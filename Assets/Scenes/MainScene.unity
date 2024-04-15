@@ -6357,8 +6357,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -24354,7 +24354,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 782dc0c67f28bd84f8053d23ad3a277c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3700d1671c3abd446b8f1d912bb79925, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29956,9 +29956,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 619e3f126c4852e41b0238fbedbf8310, type: 3}
   - {fileID: 21300000, guid: 16f357adc894ef646a414678ecad2220, type: 3}
   backgroundTexts:
-  - {fileID: 21300000, guid: 782dc0c67f28bd84f8053d23ad3a277c, type: 3}
-  - {fileID: 21300000, guid: 788eea95ba7f30d43bcb5beea70f19a7, type: 3}
-  - {fileID: 21300000, guid: 9aec3d49d9f224046915e13ad9c7bd36, type: 3}
+  - {fileID: 21300000, guid: 3700d1671c3abd446b8f1d912bb79925, type: 3}
+  - {fileID: 21300000, guid: f389e0d940d68744aa1a09328ceadd46, type: 3}
+  - {fileID: 21300000, guid: 8926d9617aeb1f24da0c709699786e6a, type: 3}
   restartButton: {fileID: 0}
   quitButton: {fileID: 0}
   circleUpdateSound: {fileID: 730538762}

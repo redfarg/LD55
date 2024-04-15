@@ -19,7 +19,7 @@ public class DisplayPaintResultText : MonoBehaviour
         var manager = gameManager.GetComponent<GameManager>();
         manager.OnDeterminedCorrectPercentage += DisplayResultText;
         manager.OnEndOfRitual += DisplayEndOfStageText;
-        manager.OnRemoveSigilAccuracyText += ClearResultText;
+        manager.OnRemoveSigilAccuracyText += UpdateResultText;
         manager.OnRitualStart += DisplayRitualStartText;
         manager.OnIntroEnd += ClearIntroText;
         manager.OnSigilIntroStart += DisplaySigilIntroText;
@@ -46,20 +46,37 @@ public class DisplayPaintResultText : MonoBehaviour
     {
         messageBox.SetActive(false);
         messageText.text = "";
-        resultText.text = "";
+        //resultText.text = "";
     }
 
     private void DisplayRitualStartText(int ritualCount)
     {
         var summonOptions = ScoreTranslator.TranslateSummonOptions(ritualCount);
-        resultText.text = $"Summon forth this {summonOptions.Item1}!";
+        //resultText.text = $"Summon forth this {summonOptions.Item1}!";
+        UpdateResultText(ritualCount);
+        
         messageBox.SetActive(true);
-        messageText.text = "The ritual begins...";
+
+        var numStr = ritualCount switch
+        {
+            0 => "first",
+            1 => "second",
+            2 => "last",
+            _ => "next"
+        };
+        messageText.text = $"The {numStr} ritual begins...";
     }
 
-    private void ClearResultText()
+    private void UpdateResultText(int numberOfRituals)
     {
-        resultText.text = "";
+        var thresholdStr = numberOfRituals switch
+        {
+            0 => "50%",
+            1 => "60%",
+            2 => "70%",
+            _ => "A lot"
+        };
+        resultText.text = $"Total power needed:\n{thresholdStr}";
     }
 
     private void DisplayEndOfStageText(float totalPercentage, int ritualCount)
