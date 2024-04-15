@@ -26,11 +26,11 @@ public class SummaryMessageText : MonoBehaviour
             if (SummoningWasSuccessful(aggregatedScores, scoreIndex))
             {
                 var adjective = ScoreTranslator.TranslateAdjectiveOptions(aggregatedScores[scoreIndex]);
-                message += $"{adjective} {summonOptions.Item1}\t\t{aggregatedScores[scoreIndex]:0.00}%.\n";
+                message += $"A {adjective} {summonOptions.Item1}  {aggregatedScores[scoreIndex]:0.00}%.\n";
             }
             else
             {
-                message += $"{summonOptions.Item2}\t\t{aggregatedScores[scoreIndex]:0.00}%\n";
+                message += $"A {summonOptions.Item2}  {aggregatedScores[scoreIndex]:0.00}%\n";
             }
         }
         messageText.text = message;
