@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,14 @@ public class SummonsSpawner : MonoBehaviour
     [SerializeField] Sprite spriteShrimp;
     [SerializeField] Sprite spriteFriend;
     [SerializeField] Sprite spritePotato;
- 
+    [SerializeField] List<AudioSource> impSummonSounds;
+    [SerializeField] List<AudioSource> fiendSummonSounds;
+    [SerializeField] List<AudioSource> lordSummonSounds;
+    [SerializeField] AudioSource shrimpSummonSound;
+    [SerializeField] AudioSource friendSummonSound;
+    [SerializeField] AudioSource potatoSummonSound;
+
+
     private List<int> summoningSuccessFullThreshholds;
 
     private SpriteRenderer spriteRenderer;
@@ -30,18 +38,63 @@ public class SummonsSpawner : MonoBehaviour
     {
         bool ritualSuccess = totalPercentage / 100f >= summoningSuccessFullThreshholds[ritualCount] / 500f;
 
-        if (ritualCount == 0) {
-            if(ritualSuccess) spriteRenderer.sprite = spriteImp;
-            else spriteRenderer.sprite = spriteShrimp;
+        switch (ritualCount)
+        {
+            case 0:
+                if (ritualSuccess)
+                {
+                    spriteRenderer.sprite = spriteImp;
+                    PlayImpSummonSound();
+                }
+                else
+                {
+                    spriteRenderer.sprite = spriteShrimp;
+                    shrimpSummonSound.Play();
+                }
+                break;
+            case 1:
+                if (ritualSuccess)
+                {
+                    spriteRenderer.sprite = spriteFiend;
+                    PlayFiendSummonSound();
+                }
+                else
+                {
+                    spriteRenderer.sprite = spriteFriend;
+                    friendSummonSound.Play();
+                }
+                break;
+            case 2:
+                if (ritualSuccess)
+                {
+                    spriteRenderer.sprite = spriteLord;
+                    PlayLordSummonSound();
+                }
+                else
+                {
+                    spriteRenderer.sprite = spritePotato;
+                    potatoSummonSound.Play();
+                }
+                break;
         }
-        else if (ritualCount == 1) {
-            if(ritualSuccess) spriteRenderer.sprite = spriteFiend;
-            else spriteRenderer.sprite = spriteFriend;
-        }
-        else if (ritualCount == 2) {
-            if(ritualSuccess) spriteRenderer.sprite = spriteLord;
-            else spriteRenderer.sprite = spritePotato;
-        }
+    }
+
+    private void PlayLordSummonSound()
+    {
+        var index = UnityEngine.Random.Range(0, lordSummonSounds.Count - 1);
+        lordSummonSounds[index].Play();
+    }
+
+    private void PlayFiendSummonSound()
+    {
+        var index = UnityEngine.Random.Range(0, fiendSummonSounds.Count - 1);
+        fiendSummonSounds[index].Play();
+    }
+
+    private void PlayImpSummonSound()
+    {
+        var index = UnityEngine.Random.Range(0, impSummonSounds.Count - 1);
+        impSummonSounds[index].Play();
     }
 
     private void HideSummon(int ritualCount)

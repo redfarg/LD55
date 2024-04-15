@@ -24853,6 +24853,20 @@ MonoBehaviour:
   spriteShrimp: {fileID: 21300000, guid: 22a4f0772ad21d243a55daea9dd1cebb, type: 3}
   spriteFriend: {fileID: 21300000, guid: 8f56c0d8ba8403d41801cd3d936d8578, type: 3}
   spritePotato: {fileID: 21300000, guid: f422ee00bb165414d968131b9d9ae259, type: 3}
+  impSummonSounds:
+  - {fileID: 279246760}
+  - {fileID: 1067014333}
+  - {fileID: 741720918}
+  fiendSummonSounds:
+  - {fileID: 1018951456}
+  - {fileID: 264506054}
+  - {fileID: 1010168154}
+  lordSummonSounds:
+  - {fileID: 1031126370}
+  - {fileID: 1992863876}
+  shrimpSummonSound: {fileID: 800296502}
+  friendSummonSound: {fileID: 945732872}
+  potatoSummonSound: {fileID: 714439310}
 --- !u!212 &611877593
 SpriteRenderer:
   m_ObjectHideFlags: 0
