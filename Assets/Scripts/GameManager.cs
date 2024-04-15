@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     public event RitualStartEventHandler OnRitualStart;
     public delegate void IntroEndEventHandler();
     public event IntroEndEventHandler OnIntroEnd;
-    public delegate void SigilIntroStartHandler();
+    public delegate void SigilIntroStartHandler(int sigilCount);
     public event SigilIntroStartHandler OnSigilIntroStart;
     public delegate void SigilIntroEndHandler();
     public event SigilIntroEndHandler OnSigilIntroEnd;
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DisplaySigilIntro()
     {
-        OnSigilIntroStart?.Invoke();
+        OnSigilIntroStart?.Invoke(numberOfSigils + 1);
         yield return new WaitForSecondsRealtime(sigilIntroDisplayTime);
         OnSigilIntroEnd?.Invoke();
     }

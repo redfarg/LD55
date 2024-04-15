@@ -36,10 +36,10 @@ public class DisplayPaintResultText : MonoBehaviour
         messageText.text = "";
     }
 
-    private void DisplaySigilIntroText()
+    private void DisplaySigilIntroText(int sigilCount)
     {
         messageBox.SetActive(true);
-        messageText.text = "Memorize and paint the sigil...";
+        messageText.text = $"Memorize and paint the sigil... {sigilCount}/5";
     }
 
     private void ClearIntroText()
